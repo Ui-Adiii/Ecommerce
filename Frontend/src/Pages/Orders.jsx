@@ -1,9 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import Title from "../Components/Title";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Orders = () => {
-  const { products, currency } = useContext(ShopContext);
+  const { backendUrl, token, products, currency } = useContext(ShopContext);
+  const [orderData, setorderData] = useState([]);
+
+  const loadOrderData = async () => {
+    try {
+      if (!token) {
+        return null;
+      }
+      const response = await axios.post(
+        backendUrl + "/api/order/userorders",
+        {},
+        { headers: { token } }
+      );
+      let allOrderItem = [];
+      if (response.data.success) {
+        response.data.orders.map((order) => {
+          order.items.map((item) => {
+            item["status"] = order.status;
+            item["payment"] = order.payment;
+            item["paymentMethod"] = order.paymentMethod;
+            item["date"] = order.date;
+            allOrderItem.push(item);
+          });
+        });
+      }
+      setorderData(allOrderItem.reverse());
+      console.log(allOrderItem);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    loadOrderData();
+  }, [token]);
+
   return (
     <div className="border-t pt-16">
       <div className="text-2xl">
@@ -11,7 +48,7 @@ const Orders = () => {
       </div>
 
       <div>
-        {products.slice(1, 4).map((item, idx) => (
+        {orderData.map((item, idx) => (
           <div
             className="py-4 border-t border-b  text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             key={idx}
@@ -20,25 +57,38 @@ const Orders = () => {
               <img src={item.image[0]} className="w-16 sm:w-[20]" alt="" />
               <div>
                 <p className="text-base font-medium">{item.name}</p>
-                <div className="flex items-center gap-3 mt-2 text-gray-700">
-                  <p className="text-lg">
+                <div className="flex items-center gap-3 mt-1 text-gray-700">
+                  <p>
                     {currency}
                     {item.price}
                   </p>
-                  <p>Quantity: 1</p>
-                  <p>Size: M</p>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Size: {item.size}</p>
                 </div>
+                <p className="mt-1">
+                  Date:{" "}
+                  <span className="text-gray-400 ">
+                    {new Date(item.date).toDateString()}
+                  </span>
+                </p>
+
                 <p className="mt-2">
-                  Date: <span className="text-gray-400 ">24, May, 2025</span>
+                  Payment:
+                  <span className="text-gray-400 ">{item.paymentMethod}</span>
                 </p>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-between">
               <div className="flex items-center gap-2">
                 <p className="min-w-2 h-2 rounded-full bg-green-500"></p>
-                <p className="text-sm md:text-base">Ready to ship</p>
+                <p className="text-sm md:text-base">{item.status}</p>
               </div>
-              <button className="border px-4 py-2 font-medium rounded-sm">Track Order</button>
+              <button
+                onClick={loadOrderData}
+                className="cursor-pointer border px-4 py-2 font-medium rounded-sm"
+              >
+                Track Order
+              </button>
             </div>
           </div>
         ))}

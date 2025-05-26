@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     address: {
-      type: object,
+      type: Object,
       required: true,
     },
     status: {
@@ -32,7 +32,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    data: {
+    date: {
       type: Number,
       required: true,
     },
