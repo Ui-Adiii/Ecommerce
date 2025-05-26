@@ -1,5 +1,9 @@
 import Order from "../models/order.model.js";
 import User from "../models/user.model.js";
+import Stripe from "stripe";
+
+
+
 
 //placing order using COD method
 const placeOrder = async (req, res) => {
@@ -29,10 +33,14 @@ const placeOrder = async (req, res) => {
 };
 
 //placing order using Stripe method
-const placeOrderStripe = async (req, res) => {};
+const placeOrderStripe = async (req, res) => {
+ 
+};
 
 //placing order using Razorpay method
-const placeOrderRazorpay = async (req, res) => {};
+const placeOrderRazorpay = async (req, res) => {
+ 
+};
 
 // All orders data for Admin Panel
 const allOrders = async (req, res) => {
@@ -67,7 +75,7 @@ const updateOrderStatus = async (req, res) => {
   try {
     const { orderId, status } = req.body;
     await Order.findByIdAndUpdate(orderId, { status });
-    res.json({success:true,message:"Status Updated"})
+    res.json({ success: true, message: "Status Updated" });
   } catch (error) {
     res.json({
       success: false,
