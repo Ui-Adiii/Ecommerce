@@ -29,8 +29,8 @@ const List = ({ token }) => {
         { headers: { token } }
       );
       if (response.data.success) {
-        toast.success(response.data.message);
         await fetchList()
+        toast.success(response.data.message);
       }
       else {
         toast.error(response.data.message);

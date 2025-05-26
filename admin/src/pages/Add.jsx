@@ -48,8 +48,6 @@ const Add = ({ token }) => {
         setname("");
         setdescription("");
         setprice("");
-        setcategory("");
-        setsubCategory("");
         setbestSeller("");
         setsizes("");
         setimage1("");
