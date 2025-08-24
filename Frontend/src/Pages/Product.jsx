@@ -7,15 +7,17 @@ import RelatedProducts from "../Components/RelatedProducts";
 const Product = () => {
   const { productId } = useParams();
   const { products, currency, addToCart } = useContext(ShopContext);
-  const [productData, setproductData] = useState(false);
+  const [productData, setproductData] = useState(null);
   const [image, setimage] = useState("");
   const [size, setsize] = useState("");
+  const [reviewCount, setReviewCount] = useState(0);
 
   const fetchProductData = async () => {
     products.map((item) => {
       if (item._id == productId) {
         setproductData(item);
         setimage(item.image[0]);
+        setReviewCount(Math.floor(Math.random() * 500) + 50); // Random number between 50-549
         return null;
       }
     });
@@ -54,7 +56,7 @@ const Product = () => {
             <img src={assets.star_icon} alt="" className="w-3" />
             <img src={assets.star_icon} alt="" className="w-3" />
             <img src={assets.star_dull_icon} alt="" className="w-3" />
-            <p className="pl-2">(122)</p>
+            <p className="pl-2">({reviewCount})</p>
           </div>
           <div>
             <p className="mt-5 text-3xl font-medium">
@@ -98,7 +100,7 @@ const Product = () => {
       <div className="mt-20">
         <div className="flex">
           <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (122)</p>
+          <p className="border px-5 py-3 text-sm">Reviews ({reviewCount})</p>
         </div>
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
           <p>

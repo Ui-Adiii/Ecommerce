@@ -7,10 +7,7 @@ const Footer = () => {
         <div>
           <img src={assets.logo} className="mb-5 w-32" alt="" />
           <p className="w-full md:w-2/3 text-gray-400">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            Forever is your premier destination for exceptional online shopping experiences. We're dedicated to bringing you the finest selection of products, backed by outstanding customer service and innovative technology that makes shopping effortless and enjoyable.
           </p>
         </div>
         <div>
@@ -18,24 +15,24 @@ const Footer = () => {
           <ul className="flex flex-col gap-1 text-gray-600">
             <li>Home</li>
             <li>About us</li>
-            <li>Delivery </li>
-            <li>Provacy Policy</li>
+            <li>Shipping & Returns</li>
+            <li>Privacy Policy</li>
           </ul>
         </div>
 
         <div>
-          <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
+          <p className="text-xl font-medium mb-5">CONNECT WITH US</p>
           <ul className="flex flex-col gap-1 text-gray-600">
-            <li>9348370213</li>
-            <li>beingadiytya198@gmail.com</li>
-            <li></li>
+            <li>+1 (555) 987-6543</li>
+            <li>support@forever.com</li>
+            <li>Live Chat Available</li>
           </ul>
         </div>
       </div>
       <div>
         <hr  />
         <p className="py-5 text-sm text-center">
-          Copyright 2024@ greatstack.dev - All Right Reserved.
+          Copyright 2025@ Forever E-commerce - All Rights Reserved.
         </p>
       </div>
     </div>
