@@ -89,5 +89,5 @@ A full-featured, modern e-commerce platform built with the **MERN stack** (Mongo
 1. **Clone the Repository**
    ```bash
    git clone <repository-url>
-   cd Ecommerce-main
+   cd Ecommerce
    ```
